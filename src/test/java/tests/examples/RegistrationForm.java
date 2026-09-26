@@ -14,17 +14,17 @@ public class RegistrationForm extends TestBase {
     @Test
     void firstTest() {
         open("/automation-practice-form");
-        $("[#firstName]").setValue("Mary");
-        $("[#lastName]").setValue("Cher");
-        $("[#userEmail]").setValue("mary023@gmail.com");
-        $("[#'gender-radio-2']").click();
+        $("[id=firstName]").setValue("Mary");
+        $("[id=lastName]").setValue("Cher");
+        $("[id=userEmail]").setValue("mary023@gmail.com");
+        $("[id='gender-radio-2']").click();
 
-        $("[#userNumber]").setValue("1234567890");
+        $("[id=userNumber]").setValue("1234567890");
 
-        //$("[#dateOfBirthInput]").click();
-      //  $("[#react-datepicker__month-select]").$(byText("September")).click();;
-       // $("[#react-datepicker__month-select]").$(byText("1983")).click();;
-      //  $("[#=eact-datepicker__day--015]").click();
+        //$("[id=dateOfBirthInput]").click();
+      //  $("[id=react-datepicker__month-select]").$(byText("September")).click();;
+       // $("[id=react-datepicker__month-select]").$(byText("1983")).click();;
+      //  $("[id==eact-datepicker__day--015]").click();
 
         $("[id=subjectsInput]").setValue("English").pressEnter();
         $("[id=hobbies-checkbox-1]").click();
