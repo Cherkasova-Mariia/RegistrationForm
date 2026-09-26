@@ -32,6 +32,6 @@ public class TextBoxForm extends TestBase{
         $("[id=permanentAddress]").setValue("Ryazan");
         $("[id=submit]").click();
 
-        $("[id=output] [id=name]").shouldNotBe(visible);
+        $("[id=output]").shouldNotBe(visible);
     }
 }
