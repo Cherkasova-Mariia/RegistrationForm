@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
+
     @BeforeAll
     static void beforeAll() {
         Configuration.browser = "chrome";
