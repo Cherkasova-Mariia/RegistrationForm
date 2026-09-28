@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.files.DownloadActions.click;
 
 
 public class RegistrationFormMax extends TestBase {
@@ -19,7 +20,7 @@ public class RegistrationFormMax extends TestBase {
         $("[id=firstName]").setValue("Mary");
         $("[id=lastName]").setValue("Cher");
         $("[id=userEmail]").setValue("mary023@gmail.com");
-        $("[id=gender-radio-2]").click();
+        $("[id=genterWrapper]").$(byText("Female")).click();
         $("[id=userNumber]").setValue("1234567890");
         $("[id=dateOfBirthInput]").click();
         $(".react-datepicker__month-select").selectOption("September");
@@ -27,7 +28,7 @@ public class RegistrationFormMax extends TestBase {
         $(".react-datepicker__day--015").click();
         $("[id=subjectsInput]").setValue("English").pressEnter();
         $("[id=hobbies-checkbox-1]").click();
-        $("[id=uploadPicture]").uploadFile(new File("src/test/resources/test.txt"));
+        $("[id=uploadPicture]").uploadFromClasspath("test.txt");
         $("[id=currentAddress]").setValue("First address");
         $("[id=state]").click();
         $("[id=state]").$(byText("NCR")).click();
