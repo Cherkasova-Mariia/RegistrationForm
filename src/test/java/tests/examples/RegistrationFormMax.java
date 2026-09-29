@@ -27,7 +27,7 @@ public class RegistrationFormMax extends TestBase {
         $(".react-datepicker__year-select").selectOption("1983");
         $(".react-datepicker__day--015").click();
         $("[id=subjectsInput]").setValue("English").pressEnter();
-        $("[id=hobbies-checkbox-1]").click();
+        $("[id=hobbiesWrapper]").$(byText("Sports")).click();
         $("[id=uploadPicture]").uploadFromClasspath("test.txt");
         $("[id=currentAddress]").setValue("First address");
         $("[id=state]").click();
