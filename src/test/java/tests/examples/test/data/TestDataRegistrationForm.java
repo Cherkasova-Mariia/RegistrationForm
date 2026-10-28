@@ -1,6 +1,6 @@
 package tests.examples.test.data;
 
-public class TestData {
+public class TestDataRegistrationForm {
     public static String firstName = "Mary";
     public static String lastName = "Cher";
     public static String userEmail = "mary023@gmail.com";
@@ -16,4 +16,5 @@ public class TestData {
     public static String hobbie = "Sports";
     public static String state = "NCR";
     public static String city = "Delhi";
+
 }
