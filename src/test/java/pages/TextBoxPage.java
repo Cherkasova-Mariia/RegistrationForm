@@ -1,0 +1,79 @@
+package pages;
+
+import com.codeborne.selenide.SelenideElement;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static tests.examples.test.data.TestDataTextBox.currentAddress;
+import static tests.examples.test.data.TestDataTextBox.userName;
+
+public class TextBoxPage {
+    //Elements
+    private SelenideElement userNameInput = $("#userName");
+    private SelenideElement userEmailInputCorrect = $("#userEmail");
+    private SelenideElement userEmailInputIncorrect = $("#userEmail");
+    private SelenideElement userCurrentAddress = $("#currentAddress");
+    private SelenideElement userPermanentAddress =  $("#permanentAddress");
+    private SelenideElement submitButton = $("#submit");
+    private SelenideElement outputResults = $("#output");
+
+    //Actions
+
+    public TextBoxPage openPage(){
+        open("/text-box");
+
+        return this;
+    }
+
+    public TextBoxPage typeUserName(String value){
+        userNameInput.setValue(value);
+
+        return this;
+    }
+
+    public TextBoxPage typeUserEmailCorrect(String value){
+        userEmailInputCorrect.setValue(value);
+
+        return this;
+    }
+
+    public TextBoxPage typeUserEmailIncorrect(String value){
+        userEmailInputIncorrect.setValue(value);
+
+        return this;
+    }
+
+    public TextBoxPage typeCurrentAddress(String value){
+        userCurrentAddress.setValue(value);
+
+        return this;
+    }
+
+    public TextBoxPage typePermanentAddress(String value){
+        userPermanentAddress.setValue(value);
+
+        return this;
+    }
+
+    public TextBoxPage submitForm(){
+        submitButton.click();
+
+        return this;
+    }
+
+    public TextBoxPage checkField(String key, String value){
+        outputResults.$(byId(key)).shouldHave(text(value));
+
+        return this;
+    }
+
+    public TextBoxPage checkFieldInvisible(){
+        outputResults.shouldNotBe(visible);
+
+        return this;
+    }
+
+}
