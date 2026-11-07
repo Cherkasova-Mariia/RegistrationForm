@@ -4,12 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationFormPage;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static tests.examples.test.data.TestDataRegistrationForm.*;
-
 
 public class RegistrationFormTests extends TestBase {
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
@@ -17,6 +12,7 @@ public class RegistrationFormTests extends TestBase {
     @Test
     @DisplayName("Все поля заполнены")
     void registrationFormMaxFields () {
+
         registrationFormPage.openPage()
                         .typeFirstName(firstName)
                         .typeLastName(lastName)

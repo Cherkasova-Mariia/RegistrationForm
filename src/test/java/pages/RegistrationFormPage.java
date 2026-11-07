@@ -5,11 +5,10 @@ import pages.components.CalendarComponent;
 import pages.components.RegistrationResultsComponent;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byId;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static tests.examples.test.data.TestDataRegistrationForm.*;
 
 public class RegistrationFormPage {
     //Elements
@@ -24,6 +23,7 @@ public class RegistrationFormPage {
     private SelenideElement userNumberCorrectInput = $("#userNumber");
     private SelenideElement userNumberIncorrectInput = $("#userNumber");
     private SelenideElement userSubjectsInput = $("#subjectsInput");
+    private SelenideElement subjectsComplete = $(".subjects-auto-complete__option");
     private SelenideElement userHobbyInput = $("#hobbiesWrapper");
     private SelenideElement userUploadPicture = $("#uploadPicture");
     private SelenideElement userCurrentAddress = $("#currentAddress");
@@ -33,9 +33,7 @@ public class RegistrationFormPage {
     private SelenideElement submitButton = $("#submit");
     private SelenideElement outputResults = $(".modal-content");
 
-
     //Actions
-
     public RegistrationFormPage openPage(){
         open("/automation-practice-form");
 
@@ -91,14 +89,14 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage setSubject (String value){
-        userSubjectsInput.setValue(subject).pressEnter();
-
+    public RegistrationFormPage setSubject(String value) {
+        userSubjectsInput.setValue(value);
+        subjectsComplete.click();
         return this;
     }
 
     public RegistrationFormPage setHobby (String value) {
-        userHobbyInput.$(byText(hobby)).click();
+        userHobbyInput.$(byText(value)).click();
 
         return this;
     }
@@ -136,9 +134,8 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage  submitForm(){
-        submitButton.click();
-
+    public RegistrationFormPage submitForm() {
+        submitButton.scrollTo().click();
         return this;
     }
 
