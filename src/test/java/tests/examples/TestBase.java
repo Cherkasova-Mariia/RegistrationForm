@@ -28,7 +28,7 @@ public class TestBase {
         Configuration.timeout = 15000;
        // Configuration.browserVersion = "157.0";
 
-        //Configuration.remote = "https://user1:1234@selenoid.qa.guru/wd/hub";
+        Configuration.remote = "https://user1:1234@selenoid.qa.guru/wd/hub";
     }
 
     @AfterEach
