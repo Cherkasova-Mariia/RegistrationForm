@@ -1,43 +1,52 @@
 package tests.examples;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationFormPage;
 import tests.examples.test.data.TestDataRegistrationForm;
 
+import static io.qameta.allure.Allure.step;
+
 public class RegistrationFormTests extends TestBase {
-    RegistrationFormPage registrationFormPage = new RegistrationFormPage();
 
     @Test
     @DisplayName("Все поля заполнены")
     void registrationFormMaxFields() {
         TestDataRegistrationForm data = new TestDataRegistrationForm();
 
-        registrationFormPage.openPage()
-                .typeFirstName(data.firstName)
-                .typeLastName(data.lastName)
-                .userEmailCorrect(data.userEmailCorrect)
-                .setGender(data.gender)
-                .userNumberCorrect(data.userNumberCorrect)
-                .setDateOfBirth(data.dayOfBirth, data.monthOfBirth, data.yearOfBirth)
-                .setSubject(data.subject)
-                .setHobby(data.hobby)
-                .setUploadPicture()
-                .setCurrentAddress(data.currentAddress)
-                .setStateAndCity(data.state, data.city)
-                .submitForm()
+        step("Открываем главную страницу", () ->
+                registrationFormPage.openPage());
 
-                .checkModalWindow()
-                .checkTable("Student Name", (data.firstName + " " + data.lastName))
-                .checkTable("Student Email", data.userEmailCorrect)
-                .checkTable("Gender", data.gender)
-                .checkTable("Mobile", data.userNumberCorrect)
-                .checkTable("Date of Birth", data.dayOfBirth + " " + data.monthOfBirth + "," + data.yearOfBirth)
-                .checkTable("Subjects", data.subject)
-                .checkTable("Hobbies", data.hobby)
-                .checkTable("Picture", "test.txt")
-                .checkTable("Address", data.currentAddress)
-                .checkTable("State and City", data.state + " " + data.city);
+        step("Заполняем все поля формы", () -> {
+            registrationFormPage.typeFirstName(data.firstName)
+                    .typeLastName(data.lastName)
+                    .userEmailCorrect(data.userEmailCorrect)
+                    .setGender(data.gender)
+                    .userNumberCorrect(data.userNumberCorrect)
+                    .setDateOfBirth(data.dayOfBirth, data.monthOfBirth, data.yearOfBirth)
+                    .setSubject(data.subject)
+                    .setHobby(data.hobby)
+                    .setUploadPicture()
+                    .setCurrentAddress(data.currentAddress)
+                    .setStateAndCity(data.state, data.city)
+                    .submitForm();
+        });
+
+        step("Проверяем результат", () -> {
+            registrationFormPage.checkModalWindow()
+                    .checkTable("Student Name", (data.firstName + " " + data.lastName))
+                    .checkTable("Student Email", data.userEmailCorrect)
+                    .checkTable("Gender", data.gender)
+                    .checkTable("Mobile", data.userNumberCorrect)
+                    .checkTable("Date of Birth", data.dayOfBirth + " " + data.monthOfBirth + "," + data.yearOfBirth)
+                    .checkTable("Subjects", data.subject)
+                    .checkTable("Hobbies", data.hobby)
+                    .checkTable("Picture", "test.txt")
+                    .checkTable("Address", data.currentAddress)
+                    .checkTable("State and City", data.state + " " + data.city);
+        });
     }
 
     @Test
@@ -45,17 +54,23 @@ public class RegistrationFormTests extends TestBase {
     void registrationFormMinFields() {
         TestDataRegistrationForm data = new TestDataRegistrationForm();
 
-        registrationFormPage.openPage()
-                .typeFirstName(data.firstName)
-                .typeLastName(data.lastName)
-                .setGender(data.gender)
-                .userNumberCorrect(data.userNumberCorrect)
-                .submitForm()
+        step("Открываем главную страницу", () ->
+                registrationFormPage.openPage());
 
-                .checkModalWindow()
-                .checkTable("Student Name", (data.firstName + " " + data.lastName))
-                .checkTable("Gender", data.gender)
-                .checkTable("Mobile", data.userNumberCorrect);
+        step("Заполняем обязательные поля формы", () -> {
+            registrationFormPage.typeFirstName(data.firstName)
+                    .typeLastName(data.lastName)
+                    .setGender(data.gender)
+                    .userNumberCorrect(data.userNumberCorrect)
+                    .submitForm();
+        });
+
+        step("Проверяем результат", () -> {
+            registrationFormPage.checkModalWindow()
+                    .checkTable("Student Name", (data.firstName + " " + data.lastName))
+                    .checkTable("Gender", data.gender)
+                    .checkTable("Mobile", data.userNumberCorrect);
+        });
     }
 
     @Test
@@ -71,27 +86,40 @@ public class RegistrationFormTests extends TestBase {
     void registrationFormIncorrectNumber() {
         TestDataRegistrationForm data = new TestDataRegistrationForm();
 
-        registrationFormPage.openPage()
-                .typeFirstName(data.firstName)
-                .typeLastName(data.lastName)
-                .setGender(data.gender)
-                .userNumberIncorrect(data.userNumberIncorrect)
-                .submitForm()
-                .checkFieldInvisible();
+        step("Открываем главную страницу", () ->
+                registrationFormPage.openPage());
+
+        step("Заполняем обязательные поля формы, указывая номер телефона в некорректном формате", () -> {
+
+            registrationFormPage.typeFirstName(data.firstName)
+                    .typeLastName(data.lastName)
+                    .setGender(data.gender)
+                    .userNumberIncorrect(data.userNumberIncorrect)
+                    .submitForm();
+        });
+
+        step("Проверяем, что модальное окно не появилось", () ->
+                registrationFormPage.checkFieldInvisible());
     }
 
     @Test
-    @DisplayName("Некорретная электронная почта")
+    @DisplayName("Некорректная электронная почта")
     void registrationFormIncorrectEmail() {
         TestDataRegistrationForm data = new TestDataRegistrationForm();
 
-        registrationFormPage.openPage()
-                .typeFirstName(data.firstName)
-                .typeLastName(data.lastName)
-                .userEmailIncorrect(data.userEmailIncorrect)
-                .setGender(data.gender)
-                .userNumberCorrect(data.userNumberCorrect)
-                .submitForm()
-                .checkFieldInvisible();
+        step("Открываем главную страницу", () ->
+                registrationFormPage.openPage());
+
+        step("Заполняем обязательные поля формы, указывая некорректный email", () -> {
+            registrationFormPage.typeFirstName(data.firstName)
+                    .typeLastName(data.lastName)
+                    .userEmailIncorrect(data.userEmailIncorrect)
+                    .setGender(data.gender)
+                    .userNumberCorrect(data.userNumberCorrect)
+                    .submitForm();
+        });
+
+        step("Проверяем, что модальное окно не появилось", () ->
+                registrationFormPage.checkFieldInvisible());
     }
 }
