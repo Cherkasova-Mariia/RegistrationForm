@@ -26,10 +26,12 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.browser = "chrome";
-        //Configuration.browserVersion = "151.0";
+        Configuration.baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("browserVersion", "157.0");
+        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+        Configuration.remote = System.getProperty("remote", "https://user1:1234@selenoid.qa.guru/wd/hub");
         Configuration.timeout = 15000;
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-dev-shm-usage", "--no-sandbox");
@@ -39,7 +41,7 @@ public class TestBase {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = chromeOptions;
-        Configuration.remote = "https://user1:1234@selenoid.qa.guru/wd/hub";
+
     }
 
     @AfterEach
