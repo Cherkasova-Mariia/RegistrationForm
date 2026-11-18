@@ -1,10 +1,8 @@
 package tests.examples;
 
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.RegistrationFormPage;
+
 import tests.examples.test.data.TestDataRegistrationForm;
 
 import static io.qameta.allure.Allure.step;
