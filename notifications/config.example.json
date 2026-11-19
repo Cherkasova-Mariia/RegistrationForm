@@ -1,0 +1,24 @@
+{
+  "base": {
+    "project": "${JOB_BASE_NAME}",
+    "environment": "demoqa.com",
+    "comment": "QA.GURU homework: Telegram notification about autotest results",
+    "reportLink": "${BUILD_URL}allure/index.html",
+    "language": "ru",
+    "allureFolder": "allure-report",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "__BOT_TOKEN__",
+    "chat": "__CHAT_ID__",
+    "topic": "",
+    "replyTo": ""
+  },
+  "proxy": {
+    "type": "socks5",
+    "host": "proxy.qaguru.school",
+    "port": 7777,
+    "username": "__PROXY_USER__",
+    "password": "__PROXY_PASS__"
+  }
+}
